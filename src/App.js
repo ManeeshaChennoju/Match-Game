@@ -316,6 +316,10 @@ class MatchGame extends Component {
   componentDidMount() {
     this.timeId = setInterval(this.tick, 1000)
   }
+  
+  componentWillUnmount() {
+    clearInterval(this.timeId)
+  }
 
   tick = () => {
     const {seconds} = this.state
@@ -342,6 +346,7 @@ class MatchGame extends Component {
       }))
     } else {
       this.setState({isGameRunning: false})
+      clearInterval(this.timeId)
     }
   }
 
@@ -357,6 +362,7 @@ class MatchGame extends Component {
       seconds: 60,
       tabId: 'FRUIT',
     })
+    this.timeId = setInterval(this.tick, 1000)
   }
 
   render() {
